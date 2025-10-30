@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from IPython.display import display  # Agar tidak warning di VS Code
+from IPython.display import display
 
 
 
@@ -98,4 +98,5 @@ print(f"Alamat : {calon_tertinggi['Alamat']}")
 print(f"Tinggi : {int(calon_tertinggi['Tinggi'])} cm")
 
 print("\nAnalisis data selesai.")
+
 
