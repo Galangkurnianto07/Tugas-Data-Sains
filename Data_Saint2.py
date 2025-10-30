@@ -7,7 +7,7 @@ from IPython.display import display  # Agar tidak warning di VS Code
 try:
     df = pd.read_csv('calon_tni.csv')
 
-    # Menstandarkan nama kolom agar sesuai
+    
     df.columns = ['Nama', 'Alamat', 'Tinggi']
     df['Tinggi'] = pd.to_numeric(df['Tinggi'], errors='coerce')
     df.dropna(subset=['Tinggi'], inplace=True)
@@ -30,7 +30,7 @@ print("Data berhasil dimuat.\n")
 print("=== Data Calon TNI ===\n")
 display(df)
 
-# Bagian 2: Statistik Dasar
+# Statistik Dasar
 print("=== Statistik Dasar Tinggi Badan ===")
 print(df['Tinggi'].describe())
 
@@ -46,7 +46,7 @@ Terendah           : {minimum} cm
 Median             : {median:.2f} cm
 """)
 
-# Bagian 3: Pengelompokan Berdasarkan Rata-rata
+# Rata-rata Tinggi
 rata_rata_tinggi = df['Tinggi'].mean()
 df_tinggi_di_atas_rata = (
     df[df['Tinggi'] > rata_rata_tinggi]
@@ -57,13 +57,12 @@ df_tinggi_di_atas_rata = (
 print("=== Calon di Atas Rata-rata Tinggi  ===")
 display(df_tinggi_di_atas_rata[['Nama', 'Alamat', 'Tinggi']])
 
-# Bagian 4: Urutan dari Tertinggi ke Terendah
 df_urut_tinggi = df.sort_values(by='Tinggi', ascending=False).reset_index(drop=True)
 
 print("=== Urutan Calon Berdasarkan Tinggi Badan (Tertinggi ke Terendah) ===")
 display(df_urut_tinggi[['Nama', 'Alamat', 'Tinggi']])
 
-# Bagian 4: Kategori Tinggi Badan
+# Kategori Tinggi Badan
 def kategori_tinggi(tinggi):
     if tinggi >= 180:
         return 'Tinggi'
@@ -78,7 +77,7 @@ df['Kategori'] = df['Tinggi'].apply(kategori_tinggi)
 print("=== Daftar Calon dengan Kategori Tinggi Badan ===")
 display(df[['Nama', 'Alamat', 'Tinggi', 'Kategori']])
 
-# Bagian 5: Statistik Kategori
+# Statistik Kategori
 print("=== Jumlah Calon per Kategori ===")
 print(df['Kategori'].value_counts().to_string())
 
@@ -90,7 +89,7 @@ print("\n=== Statistik Lanjutan ===")
 print(f"Standar deviasi   : {round(standar_deviasi_sampel, 2)}")
 print(f"Variansi          : {round(variansi_sampel, 2)}")
 
-# Bagian 6: Calon Tertinggi
+# Calon Tertinggi
 calon_tertinggi = df.loc[df['Tinggi'].idxmax()]
 
 print("\n=== Calon dengan Tinggi Tertinggi ===")
@@ -99,3 +98,4 @@ print(f"Alamat : {calon_tertinggi['Alamat']}")
 print(f"Tinggi : {int(calon_tertinggi['Tinggi'])} cm")
 
 print("\nAnalisis data selesai.")
+
